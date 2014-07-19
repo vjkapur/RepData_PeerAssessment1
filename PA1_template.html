@@ -206,28 +206,9 @@ data &lt;- read.csv(&quot;activity.csv&quot;)
 
 <p>To determine the mean total number of steps taken per day, we can use the <code>summaryBy</code> function in the <code>doBy</code> package to sum steps per date, then take the mean of the results.</p>
 
-<pre><code class="r">install.packages(&quot;doBy&quot;) ##(if necessary)
-</code></pre>
-
-<pre><code>## Installing package into &#39;/Users/vj/Library/R/3.0/library&#39;
-## (as &#39;lib&#39; is unspecified)
-</code></pre>
-
-<pre><code>## --- Please select a CRAN mirror for use in this session ---
-## 
-## The downloaded binary packages are in
-##  /var/folders/5s/x0295db12v102t796tkxh5th0000gn/T//RtmpQIiV0d/downloaded_packages
-</code></pre>
-
-<pre><code class="r">library(doBy)
-</code></pre>
-
-<pre><code>## Loading required package: survival
-## Loading required package: splines
-## Loading required package: MASS
-</code></pre>
-
-<pre><code class="r">by.date &lt;- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
+<pre><code class="r">##install.packages(&quot;doBy&quot;) ##(if necessary)
+library(doBy)
+by.date &lt;- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
 plot(by.date) ##(unnecessary visualization for fun)
 </code></pre>
 

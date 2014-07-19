@@ -15,21 +15,7 @@ To determine the mean total number of steps taken per day, we can use the ```sum
 
 
 ```r
-install.packages("doBy") ##(if necessary)
-```
-
-```
-## Installing package into '/Users/vj/Library/R/3.0/library'
-## (as 'lib' is unspecified)
-```
-
-```
-## 
-## The downloaded binary packages are in
-## 	/var/folders/5s/x0295db12v102t796tkxh5th0000gn/T//RtmpQIiV0d/downloaded_packages
-```
-
-```r
+##install.packages("doBy") ##(if necessary)
 library(doBy)
 by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
 plot(by.date) ##(unnecessary visualization for fun)
