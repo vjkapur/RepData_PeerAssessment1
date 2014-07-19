@@ -241,10 +241,11 @@ plot(by.interval, type=&quot;l&quot;, main=&quot;Steps per 5-minute Interval ave
 
 <p>We use the <code>max</code> function to find the most busy daily interval:</p>
 
-<pre><code class="r">max(by.interval$&quot;average steps&quot;)
+<pre><code class="r">by.interval[which.max(by.interval$&quot;average steps&quot;),]
 </code></pre>
 
-<pre><code>## [1] 206.2
+<pre><code>##     5-minute interval average steps
+## 104               835         206.2
 </code></pre>
 
 <h2>Imputing missing values</h2>
