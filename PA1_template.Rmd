@@ -7,15 +7,14 @@ Data is in ```activity.zip```, included in this repository. It must be unzipped 
 ```{r}
 unzip("activity.zip")
 data <- read.csv("activity.csv")
+data$date <- as.Date(data$date)
 ```
 
 ## What is mean total number of steps taken per day?
-To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date:
+To determine the mean total number of steps taken per day, we can use the ```aggregate``` function to sum steps per date:
 ```{r}
-##install.packages("doBy") ##if necessary
-library(doBy)
-by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
-steps <- by.date$steps.sum
+by.date <- aggregate(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
+steps <- by.date$steps
 hist(steps, main="Frequency of Daily Step Counts")
 ```
 

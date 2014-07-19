@@ -8,16 +8,15 @@ Data is in ```activity.zip```, included in this repository. It must be unzipped 
 ```r
 unzip("activity.zip")
 data <- read.csv("activity.csv")
+data$date <- as.Date(data$date)
 ```
 
 ## What is mean total number of steps taken per day?
-To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date:
+To determine the mean total number of steps taken per day, we can use the ```aggregate``` function to sum steps per date:
 
 ```r
-##install.packages("doBy") ##if necessary
-library(doBy)
-by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
-steps <- by.date$steps.sum
+by.date <- aggregate(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
+steps <- by.date$steps
 hist(steps, main="Frequency of Daily Step Counts")
 ```
 
@@ -30,7 +29,7 @@ mean(steps)
 ```
 
 ```
-## [1] 9354
+## [1] 10766
 ```
 
 ```r
@@ -38,7 +37,7 @@ median(steps)
 ```
 
 ```
-## [1] 10395
+## [1] 10765
 ```
 
 ## What is the average daily activity pattern?
@@ -47,11 +46,27 @@ We once again use ```summaryBy``` to average the number of steps for each 5-minu
 
 ```r
 by.interval <- summaryBy(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
+```
+
+```
+## Error: could not find function "summaryBy"
+```
+
+```r
 names(by.interval) <- c("5-minute interval", "average steps")
+```
+
+```
+## Error: object 'by.interval' not found
+```
+
+```r
 plot(by.interval, type="l", main="Steps per 5-minute Interval averaged Across Days")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+```
+## Error: object 'by.interval' not found
+```
 
 We use the ```max``` function to find the most busy daily interval:
 
@@ -60,7 +75,7 @@ max(by.interval$"average steps")
 ```
 
 ```
-## [1] 206.2
+## Error: object 'by.interval' not found
 ```
 
 ## Imputing missing values
