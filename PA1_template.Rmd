@@ -41,6 +41,7 @@ max(by.interval$"average steps")
 
 ## Imputing missing values
 
+Of ```r nrow(data)``` observations in our data, we're missing ```r sum(is.na(data$steps))``` of them. To try to fill this out...
 
 
 ## Are there differences in activity patterns between weekdays and weekends?

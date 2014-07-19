@@ -65,6 +65,7 @@ max(by.interval$"average steps")
 
 ## Imputing missing values
 
+Of ``17568`` observations in our data, we're missing ``2304`` of them. To try to fill this out...
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
