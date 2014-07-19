@@ -15,7 +15,7 @@ data$date <- as.Date(data$date)
 To determine the mean total number of steps taken per day, we can use the ```aggregate``` function to sum steps per date:
 
 ```r
-by.date <- aggregate(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
+by.date <- aggregate(steps ~ date, data=data, FUN=sum, na.rm=TRUE)
 steps <- by.date$steps
 hist(steps, main="Frequency of Daily Step Counts")
 ```
@@ -64,7 +64,72 @@ max(by.interval$"average steps")
 
 ## Imputing missing values
 
-Of ``17568`` observations in our data, we're missing ``2304`` of them. To try to fill this out...
+Of ``17568`` observations in our data, we're missing ``2304`` of them. To fill this out without a lot of complexity, we can use the means for the corresponding intervals for days for which we do have data (which we computed above).
 
+
+```r
+imputed.data <- merge(data, by.interval, by="interval", suffixes=c("",".mean"), all = TRUE)
+```
+
+```
+## Error: 'by' must specify a uniquely valid column
+```
+
+```r
+NAs <- is.na(imputed.data$steps)
+```
+
+```
+## Error: object 'imputed.data' not found
+```
+
+```r
+imputed.data$steps[NAs] <- imputed.data$steps.mean[NAs]
+```
+
+```
+## Error: object 'imputed.data' not found
+```
+
+Now let's perform our previous exploration using the _imputed_ data:
+
+```r
+imputed.by.date <- aggregate(steps ~ date, data=imputed.data, FUN=sum, na.rm=TRUE)
+```
+
+```
+## Error: object 'imputed.data' not found
+```
+
+```r
+steps <- imputed.by.date$steps
+```
+
+```
+## Error: object 'imputed.by.date' not found
+```
+
+```r
+hist(steps, main="Frequency of Daily Step Counts (with imputed values)")
+```
+
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+
+```r
+mean(steps)
+```
+
+```
+## [1] 10766
+```
+
+```r
+median(steps)
+```
+
+```
+## [1] 10765
+```
+We see no significant change upon imputing values using our simple method.
 
 ## Are there differences in activity patterns between weekdays and weekends?
