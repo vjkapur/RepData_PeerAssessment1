@@ -11,7 +11,7 @@ data <- read.csv("activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
-To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date, then take the mean of the results.
+To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date:
 
 
 ```r
@@ -42,7 +42,24 @@ median(steps)
 
 ## What is the average daily activity pattern?
 
+We once again use ```summaryBy``` to average the number of steps for each 5-minute interval across all days:
 
+
+```r
+by.interval <- summaryBy(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
+names(by.interval) <- c("5-minute interval", "average steps")
+plot(by.interval, type="l", main="Steps per 5-minute Interval averaged Across Days")
+```
+
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+
+```r
+max(by.interval$"average steps")
+```
+
+```
+## [1] 206.2
+```
 
 ## Imputing missing values
 
