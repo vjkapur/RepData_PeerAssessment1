@@ -42,31 +42,15 @@ median(steps)
 
 ## What is the average daily activity pattern?
 
-We once again use ```summaryBy``` to average the number of steps for each 5-minute interval across all days:
+We once again use ```aggregate``` to average the number of steps for each 5-minute interval across all days:
 
 ```r
-by.interval <- summaryBy(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
-```
-
-```
-## Error: could not find function "summaryBy"
-```
-
-```r
+by.interval <- aggregate(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
 names(by.interval) <- c("5-minute interval", "average steps")
-```
-
-```
-## Error: object 'by.interval' not found
-```
-
-```r
 plot(by.interval, type="l", main="Steps per 5-minute Interval averaged Across Days")
 ```
 
-```
-## Error: object 'by.interval' not found
-```
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 We use the ```max``` function to find the most busy daily interval:
 
@@ -75,7 +59,7 @@ max(by.interval$"average steps")
 ```
 
 ```
-## Error: object 'by.interval' not found
+## [1] 206.2
 ```
 
 ## Imputing missing values
