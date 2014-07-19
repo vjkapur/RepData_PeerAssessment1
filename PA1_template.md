@@ -99,6 +99,25 @@ median(steps)
 ```
 ## [1] 10766
 ```
-We see no significant change upon imputing values using our simple method.
+We see no significant change upon imputing values using our simple method; just a small upward increment of the median.
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+Let's start by labeling days using the ```weekdays``` function and some quick string-replacement, then taking the mean number of steps per interval for each category:
+
+```r
+imputed.data$day.type <- gsub("[A-Za-z]*day", "weekday", gsub("Saturday|Sunday", "weekend", weekdays(imputed.data$date)))
+by.daytype.interval <- aggregate(steps ~ interval+day.type, data=imputed.data, FUN = mean, na.rm=TRUE)
+```
+
+Then we plot them each as above and make a panel-plot to juxtapose them:
+
+```r
+par(mfcol=c(2,1))
+plot(by.daytype.interval[grep("weekend", by.daytype.interval$day.type), c(1,3)], type='l', main="weekend")
+plot(by.daytype.interval[grep("weekday", by.daytype.interval$day.type), c(1,3)], type='l', main="weekday")
+```
+
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
+
+We can see from this juxtaposition that the subjects of the data observations tend to be more active throughout the day on weekends, presumably because they spend most of weekdays sitting at a desk at work.
