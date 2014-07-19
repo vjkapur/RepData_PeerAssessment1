@@ -13,11 +13,13 @@ data <- read.csv("activity.csv")
 To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date, then take the mean of the results.
 
 ```{r}
-##install.packages("doBy") ##(if necessary)
+##install.packages("doBy") ##if necessary
 library(doBy)
 by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
-plot(by.date) ##(unnecessary visualization for fun)
-mean(by.date$steps.sum)
+steps <- by.date$steps.sum
+hist(steps, main="Frequency of Daily Step Counts")
+mean(steps)
+median(steps)
 ```
 
 ## What is the average daily activity pattern?

@@ -15,20 +15,29 @@ To determine the mean total number of steps taken per day, we can use the ```sum
 
 
 ```r
-##install.packages("doBy") ##(if necessary)
+##install.packages("doBy") ##if necessary
 library(doBy)
 by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
-plot(by.date) ##(unnecessary visualization for fun)
+steps <- by.date$steps.sum
+hist(steps, main="Frequency of Daily Step Counts")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
 ```r
-mean(by.date$steps.sum)
+mean(steps)
 ```
 
 ```
 ## [1] 9354
+```
+
+```r
+median(steps)
+```
+
+```
+## [1] 10395
 ```
 
 ## What is the average daily activity pattern?
