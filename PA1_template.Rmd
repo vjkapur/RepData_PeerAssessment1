@@ -1,13 +1,23 @@
 # Reproducible Research: Peer Assessment 1
-
+The goal of this report is to analyze...
 
 ## Loading and preprocessing the data
+Data is in ```activity.zip```, included in this repository. It must be unzipped and read in:
 
-
+```{r}
+unzip("activity.zip")
+data <- read.csv("activity.csv")
+```
 
 ## What is mean total number of steps taken per day?
+To determine the mean total number of steps taken per day, we can use the ```summaryBy``` function in the ```doBy``` package to sum steps per date, then take the mean of the results.
 
-
+```{r}
+install.packages("doBy") ##(if necessary)
+library(doBy)
+by.date <- summaryBy(steps ~ date, data=data, FUN = sum, na.rm=TRUE)
+mean(by.date$steps.sum)
+```
 
 ## What is the average daily activity pattern?
 
