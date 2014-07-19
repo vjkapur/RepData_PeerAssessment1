@@ -43,6 +43,7 @@ max(by.interval$"average steps")
 Of ```r nrow(data)``` observations in our data, we're missing ```r sum(is.na(data$steps))``` of them. To fill this out without a lot of complexity, we can use the means for the corresponding intervals for days for which we do have data (which we computed above).
 
 ```{r}
+by.interval <- aggregate(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
 imputed.data <- merge(data, by.interval, by="interval", suffixes=c("",".mean"), all = TRUE)
 NAs <- is.na(imputed.data$steps)
 imputed.data$steps[NAs] <- imputed.data$steps.mean[NAs]

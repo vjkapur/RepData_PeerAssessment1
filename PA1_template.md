@@ -68,48 +68,17 @@ Of ``17568`` observations in our data, we're missing ``2304`` of them. To fill t
 
 
 ```r
+by.interval <- aggregate(steps ~ interval, data=data, FUN = mean, na.rm=TRUE)
 imputed.data <- merge(data, by.interval, by="interval", suffixes=c("",".mean"), all = TRUE)
-```
-
-```
-## Error: 'by' must specify a uniquely valid column
-```
-
-```r
 NAs <- is.na(imputed.data$steps)
-```
-
-```
-## Error: object 'imputed.data' not found
-```
-
-```r
 imputed.data$steps[NAs] <- imputed.data$steps.mean[NAs]
-```
-
-```
-## Error: object 'imputed.data' not found
 ```
 
 Now let's perform our previous exploration using the _imputed_ data:
 
 ```r
 imputed.by.date <- aggregate(steps ~ date, data=imputed.data, FUN=sum, na.rm=TRUE)
-```
-
-```
-## Error: object 'imputed.data' not found
-```
-
-```r
 steps <- imputed.by.date$steps
-```
-
-```
-## Error: object 'imputed.by.date' not found
-```
-
-```r
 hist(steps, main="Frequency of Daily Step Counts (with imputed values)")
 ```
 
@@ -128,7 +97,7 @@ median(steps)
 ```
 
 ```
-## [1] 10765
+## [1] 10766
 ```
 We see no significant change upon imputing values using our simple method.
 
