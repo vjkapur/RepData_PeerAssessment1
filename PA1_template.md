@@ -120,4 +120,4 @@ plot(by.daytype.interval[grep("weekday", by.daytype.interval$day.type), c(1,3)],
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
 
-We can see from this juxtaposition that the subjects of the data observations tend to be more active throughout the day on weekends, presumably because they spend most of weekdays sitting at a desk at work.
+We can see from this juxtaposition that the subjects of the data observations tend to be more active throughout the day on weekends, possibly because they spend most of weekdays sitting at a desk at work.
